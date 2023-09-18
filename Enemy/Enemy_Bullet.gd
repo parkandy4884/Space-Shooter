@@ -23,7 +23,6 @@ func _on_body_entered(body):
 		var explosion = Explosion.instantiate()
 		Effects.add_child(explosion)
 		explosion.global_position = global_position
-		
 	queue_free()
 
 
