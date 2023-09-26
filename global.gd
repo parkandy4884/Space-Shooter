@@ -1,9 +1,35 @@
 extends Node
 
+const SCORES = "user://scores.sav"
+const SECRET = "HIGH"
+
 var VP = Vector2.ZERO
 var score = 0
 var lives = 0
-var time = 0
+var level = -1
+
+var levels = [
+	{
+		"title":"Level 1",
+		"subtitle":"Destory the asteroids",
+		"asteroids":[Vector2(100,100), Vector2(900,500)],
+		"enemies":[],
+		"timer":100,
+		"asteroids_spawned":false,
+		"enemies_spawned":false
+	},
+	{
+		"title":"Level 2",
+		"subtitle":"Destory the asteroids and watch out for the enemy",
+		"asteroids":[Vector2(100,100),Vector2(900,500),Vector2(800,200)],
+		"enemies":[Vector2(150,500)],
+		"timer":80,
+		"asteroids_spawned":false,
+		"enemies_spawned":false
+	}
+	
+	
+]
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -11,6 +37,23 @@ func _ready():
 	VP = get_viewport().size
 	var _signal = get_tree().get_root().size_changed.connect(_resize)
 	reset()
+
+func _physics_process(_delta):
+	var A = get_node_or_null("/root/Game/Asteroid_Container")
+	var E = get_node_or_null("/root/Game/Enemy_Container")
+	if A != null and E !=null:
+		var L = levels[level]
+		if L["asteroids_spawned"] and A.get_child_count() == 0 and L["enemies_spawned"] and E.get_child_count() == 0:
+			next_level()
+
+func reset():
+	get_tree().paused = false
+	score = 0
+	lives = 5
+	level = -1
+	for l in levels:
+		l["asteroids_spawned"] = false
+		l["enemies_spawned"] = false
 
 func _process(_delta):
 	if Input.is_action_just_pressed("Quit"):
@@ -45,8 +88,14 @@ func update_score(s):
 	if hud != null:
 		hud.update_score()
 
-func update_time(t):
-	time += t
+func next_level():
+	level += 1
+	if level >= levels.size():
+		get_tree().change_scene_to_file("res://UI/end_game.tscn") 
+	else:
+		var Level_Label = get_node_or_null("/root/Game/UI/Level")
+		if Level_Label != null:
+			Level_Label.show_labels()
 
 func _resize():
 	VP = get_viewport().size
@@ -54,8 +103,20 @@ func _resize():
 	if hud != null:
 		hud.update_lives()
 
-func reset():
-	get_tree().paused = false
-	score = 0
-	time = 30
-	lives = 5
+func load_scores():
+	var save_scores = File.new()
+	if not save_scores.file_exists(SCORES):
+		return
+	
+	save_scores.open_encrypted_with_pass(SCORES, File.READ, SECRET)
+	var contents = save_scores.get_as_text()
+	var json_contents = JSON.parse(contents)
+	if json_contents.error == OK:
+		scores = json_contents
+	save_scores.close()
+
+func save_scores():
+	var save_scores = File.new()
+	save_scores.open_encrypted_with_pass(SCORES, File.WRITE, SECRET)
+	save_scores.store_string(to_json(scores))
+	save_scores.close()
