@@ -104,19 +104,22 @@ func _resize():
 		hud.update_lives()
 
 func load_scores():
-	var save_scores = File.new()
-	if not save_scores.file_exists(SCORES):
-		return
-	
-	save_scores.open_encrypted_with_pass(SCORES, File.READ, SECRET)
-	var contents = save_scores.get_as_text()
-	var json_contents = JSON.parse(contents)
-	if json_contents.error == OK:
-		scores = json_contents
-	save_scores.close()
+if not FileAccess.file_exists(SCORES):
+return
+var save_scores = FileAccess.open(SCORES,FileAccess.READ)
+
+save_scores.open_encrypted_with_pass(SCORES, FileAccess.READ, SECRET)
+var contents = save_scores.get_as_text()
+var json_object = JSON.new()
+var json_contents = json_object.parse(contents)
+if json_contents.error == OK:
+scores = json_contents
+save_scores.close()
 
 func save_scores():
-	var save_scores = File.new()
-	save_scores.open_encrypted_with_pass(SCORES, File.WRITE, SECRET)
-	save_scores.store_string(to_json(scores))
-	save_scores.close()
+var save_scores = FileAccess.open(SCORES,FileAccess.WRITE)
+save_scores.open_encrypted_with_pass(SCORES, FileAccess.WRITE, SECRET)
+var json = JSON.new()
+var json_string = json.stringify(scores)
+save_scores.store_string(json_string)
+save_scores.close()
