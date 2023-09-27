@@ -50,6 +50,7 @@ func reset():
 	get_tree().paused = false
 	score = 0
 	lives = 5
+	load_scores()
 	level = -1
 	for l in levels:
 		l["asteroids_spawned"] = false
@@ -103,23 +104,37 @@ func _resize():
 	if hud != null:
 		hud.update_lives()
 
-func load_scores():
-if not FileAccess.file_exists(SCORES):
-return
-var save_scores = FileAccess.open(SCORES,FileAccess.READ)
+func add_score():
+	var temp = []
+	var trailer = 10000000000
+	var added = false
+	for s in score:
+		if score < trailer and score > s["score"]:
+			temp.append({"score":score})
+			added = true
+		temp.append(s)
+		trailer = s["score"]
+	if not added:
+		temp.append({"score":score})
+	score = temp
+	save_scores()
 
-save_scores.open_encrypted_with_pass(SCORES, FileAccess.READ, SECRET)
-var contents = save_scores.get_as_text()
-var json_object = JSON.new()
-var json_contents = json_object.parse(contents)
-if json_contents.error == OK:
-scores = json_contents
-save_scores.close()
+func load_scores():
+	if not FileAccess.file_exists(SCORES):
+		return
+	var save_scores = FileAccess.open(SCORES,FileAccess.READ)
+	save_scores.open_encrypted_with_pass(SCORES, FileAccess.READ, SECRET)
+	var contents = save_scores.get_as_text()
+	var json_object = JSON.new()
+	var json_contents = json_object.parse(contents)
+	if json_contents.error == OK:
+		score = json_contents.result
+	save_scores.close()
 
 func save_scores():
-var save_scores = FileAccess.open(SCORES,FileAccess.WRITE)
-save_scores.open_encrypted_with_pass(SCORES, FileAccess.WRITE, SECRET)
-var json = JSON.new()
-var json_string = json.stringify(scores)
-save_scores.store_string(json_string)
-save_scores.close()
+	var save_scores = FileAccess.open(SCORES,FileAccess.WRITE)
+	save_scores.open_encrypted_with_pass(SCORES, FileAccess.WRITE, SECRET)
+	var json = JSON.new()
+	var json_string = json.stringify(score)
+	save_scores.store_string(json_string)
+	save_scores.close()
