@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c2gmsdt5a7e0h"]
+[gd_scene load_steps=14 format=3 uid="uid://c2gmsdt5a7e0h"]
 
 [ext_resource type="PackedScene" uid="uid://8h7c0w4t8gdk" path="res://Player/player.tscn" id="1_hj8e7"]
 [ext_resource type="Script" path="res://Asteroid/Asteroid_Container.gd" id="1_jm764"]
@@ -10,7 +10,6 @@
 [ext_resource type="Script" path="res://UI/HUD.gd" id="5_cfpry"]
 [ext_resource type="Script" path="res://Enemy/Enemy_Container.gd" id="6_1oowg"]
 [ext_resource type="PackedScene" uid="uid://b6ceca6q01eco" path="res://Upgrades/upgrade_weapon.tscn" id="6_gssv6"]
-[ext_resource type="PackedScene" uid="uid://bug6yxjju586l" path="res://Upgrades/upgrade.tscn" id="7_nlren"]
 [ext_resource type="Script" path="res://UI/Menu.gd" id="7_uxo10"]
 [ext_resource type="FontFile" uid="uid://s4tyvdry5kl8" path="res://Assets/Hyperspace.otf" id="8_pp1ra"]
 [ext_resource type="Script" path="res://UI/Level.gd" id="10_3riw3"]
@@ -39,10 +38,6 @@ position = Vector2(576, 324)
 
 [node name="Upgrade_Weapon" parent="Upgrade_Container" instance=ExtResource("6_gssv6")]
 position = Vector2(1000, 200)
-
-[node name="Upgrade" parent="Upgrade_Container" instance=ExtResource("7_nlren")]
-position = Vector2(83, 580)
-scale = Vector2(0.7, 0.7)
 
 [node name="Enemy_Container" type="Node2D" parent="."]
 script = ExtResource("6_1oowg")
@@ -87,7 +82,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Health2" type="ProgressBar" parent="UI/HUD"]
-modulate = Color(0.768627, 0, 0, 1)
 layout_mode = 0
 offset_left = -100.0
 offset_top = -100.0

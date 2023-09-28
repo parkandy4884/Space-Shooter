@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bshnffdrx7g3w"]
 
 [ext_resource type="Script" path="res://Player/Bullet.gd" id="1_03oj8"]
-[ext_resource type="Texture2D" uid="uid://dhgv070v7yls5" path="res://Assets/Bullet.png" id="2_f3cw8"]
+[ext_resource type="Texture2D" uid="uid://c2vp4g0i3li2y" path="res://Assets/fireattack.png" id="2_205bo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_apmmq"]
 radius = 12.0
@@ -10,9 +10,12 @@ radius = 12.0
 script = ExtResource("1_03oj8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_f3cw8")
+position = Vector2(2, 5)
+scale = Vector2(1.89, 1.62)
+texture = ExtResource("2_205bo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, -1)
 shape = SubResource("CircleShape2D_apmmq")
 
 [node name="Timer" type="Timer" parent="."]

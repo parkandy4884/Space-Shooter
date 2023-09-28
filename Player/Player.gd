@@ -1,9 +1,10 @@
 extends CharacterBody2D
 
 var speed = 5
+var weapon = 1
 var max_speed = 400
 var rotate_speed = 0.08
-var nose = Vector2(0,-60)
+var nose = Vector2(0,-90)
 var health = 10
 var Bullet = load("res://Player/bullet.tscn")
 var Effects = null
@@ -32,12 +33,19 @@ func _physics_process(_delta):
 	move_and_slide()
 	
 	if Input.is_action_just_pressed("Shoot"):
-		var bullet = Bullet.instantiate()
-		bullet.position = position + nose.rotated(rotation)
-		bullet.rotation = rotation
-		var Effects = get_node_or_null("/root/Game/Effects")
-		if Effects != null:
-			Effects.add_child(bullet)
+		for w in range(weapon):
+			var weapon_position = nose
+			if weapon > 1:
+				if w == 1:
+					weapon_position = nose + Vector2(-40,-40).rotated(rotation)
+				elif w == 2:
+					weapon_position = nose + Vector2(80,-40).rotated(rotation)
+			var bullet = Bullet.instantiate()
+			bullet.position = position + weapon_position.rotated(rotation)
+			bullet.rotation = rotation
+			var Effects = get_node_or_null("/root/Game/Effects")
+			if Effects != null:
+				Effects.add_child(bullet)
 
 func damage(d):
 	health -= d
