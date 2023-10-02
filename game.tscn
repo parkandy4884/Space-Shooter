@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://c2gmsdt5a7e0h"]
+[gd_scene load_steps=16 format=3 uid="uid://c2gmsdt5a7e0h"]
 
 [ext_resource type="PackedScene" uid="uid://8h7c0w4t8gdk" path="res://Player/player.tscn" id="1_hj8e7"]
 [ext_resource type="Script" path="res://Asteroid/Asteroid_Container.gd" id="1_jm764"]
 [ext_resource type="Script" path="res://game.gd" id="1_o1yem"]
 [ext_resource type="Script" path="res://Player/Player_Container.gd" id="2_ajlkn"]
+[ext_resource type="Texture2D" uid="uid://bid62bp8cyb32" path="res://Assets/backgorund2.png" id="2_cujwd"]
 [ext_resource type="PackedScene" uid="uid://bkyd6dfujn7cl" path="res://Asteroid/asteroid.tscn" id="2_mf5jv"]
 [ext_resource type="PackedScene" uid="uid://bfy5q875ejgxq" path="res://Enemy/enemy.tscn" id="3_kkpkh"]
 [ext_resource type="FontFile" uid="uid://bkl6wwo8icvnq" path="res://Assets/Hyperspace Bold.otf" id="5_bc3do"]
@@ -17,6 +18,10 @@
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_o1yem")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+texture = ExtResource("2_cujwd")
 
 [node name="Asteroid_Container" type="Node2D" parent="."]
 script = ExtResource("1_jm764")
