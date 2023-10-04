@@ -15,7 +15,7 @@ var levels = [
 		"subtitle":"Destory the asteroids",
 		"asteroids":[Vector2(100,100), Vector2(900,500)],
 		"enemies":[],
-		"timer":100,
+		"timer":60,
 		"asteroids_spawned":false,
 		"enemies_spawned":false
 	},
@@ -25,6 +25,33 @@ var levels = [
 		"asteroids":[Vector2(100,100),Vector2(900,500),Vector2(800,200)],
 		"enemies":[Vector2(150,500)],
 		"timer":80,
+		"asteroids_spawned":false,
+		"enemies_spawned":false
+	},
+	{
+		"title":"Level 3",
+		"subtitle":"Destory the asteroids and watch out for the enemy",
+		"asteroids":[Vector2(100,100),Vector2(900,500),Vector2(800,200)],
+		"enemies":[Vector2(150,500), Vector2(150,1500)],
+		"timer":100,
+		"asteroids_spawned":false,
+		"enemies_spawned":false
+	},
+	{
+		"title":"Level 4",
+		"subtitle":"Destory the asteroids and watch out for the enemy",
+		"asteroids":[Vector2(100,100),Vector2(900,500),Vector2(800,200),Vector2(900,1500)],
+		"enemies":[Vector2(150,500), Vector2(150,1500)],
+		"timer":120,
+		"asteroids_spawned":false,
+		"enemies_spawned":false
+	},
+	{
+		"title":"Final Stage",
+		"subtitle":"Destory the asteroids and watch out for the enemy",
+		"asteroids":[Vector2(100,100),Vector2(900,500),Vector2(800,200),Vector2(900,1500),Vector2(100,1000)],
+		"enemies":[Vector2(150,500), Vector2(150,1500)],
+		"timer":120,
 		"asteroids_spawned":false,
 		"enemies_spawned":false
 	}
