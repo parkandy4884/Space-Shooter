@@ -57,7 +57,7 @@ theme_override_fonts/font = ExtResource("3_oggb2")
 theme_override_font_sizes/font_size = 20
 text = "Quit"
 
-[node name="Label2" type="Label" parent="."]
+[node name="Scores" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -69,7 +69,7 @@ offset_bottom = -52.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="Label2"]
+[node name="ColorRect" type="ColorRect" parent="Scores"]
 layout_mode = 0
 offset_right = 467.0
 offset_bottom = 435.0
