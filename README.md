@@ -5,7 +5,7 @@ A simple dragon shooting game
 Description
 
 ## Implementation
-The game engine was implemented in Python 3.10 with Godot 4.
+The game engine was implemented in Python 3.10 with Godot 4.1
 ## What Makes this a Game?
 Competence, Objective, Player Interaction, Challenging
 ## References
